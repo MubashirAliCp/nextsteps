@@ -1,0 +1,67 @@
+
+
+<link rel="stylesheet" type="text/css" href="stylesheets/address-view.css">
+
+<div class="address">
+<div  class="card p-3 py-3 mt-3 card-1 text-center">
+    
+        <h4>HOME</h4>
+        {{!-- {{#each address}} --}}
+        <div class="p-3 card-2"> 
+        <div class="p-3 card-child">
+            
+            <div class="d-flex flex-row align-items-center">
+              <span class="circle">
+                  <i class="fa fa-home"></i>
+              </span>
+              
+              <div class="d-flex flex-column ms-3">
+                  <h6 class="fw-bold">{{address1.name}}</h6>
+                  <span>{{address1.home}}<br>{{address1.city}}<br>{{address1.phone}}</span>
+                  
+              </div>
+                
+            </div>
+        </div>
+        
+     
+        <div class="p-3 card-child mt-4">
+            
+            <div class="d-flex flex-row align-items-center">
+              <span class="circle-2">
+                  <i class="fa fa-bank"></i>
+              </span>
+              
+              <div class="d-flex flex-column ms-3">
+                  <h6 class="fw-bold">{{address2.name}}</h6>
+                  <span>{{address2.home}}, {{address2.city}} <br>{{address2.state}}, {{address2.phone}}</span>
+                  
+              </div>
+                
+            </div>
+        </div>
+        
+        {{!-- {{/each}}    --}}
+        
+        
+        <div class="p-3 card-child mt-4 py-4">
+            
+            <div class="d-flex flex-row align-items-center">
+              <span class="circle-3">
+                  <i class="fa fa-plus"></i>
+              </span>
+              
+              <div class="d-flex flex-column ms-3 mt-1"><a href="add-address">
+                  <h6 class="fw-bold text-primary">Add New Address</h6></a>
+                  
+              </div>
+                
+            </div>
+        </div>
+         
+        
+        </div>
+        
+    
+</div>
+</div>
