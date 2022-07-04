@@ -4,10 +4,10 @@ const bcrypt = require('bcrypt')
 var nodeMailer = require('nodemailer')
 const { ObjectId } = require('mongodb');
 require('dotenv').config();
-const { response } = require('../app');
+
 const collections = require('../config/collections');
 const Razorpay = require('razorpay');
-const { resolve } = require('path');
+// const { resolve } = require('path');
 
 var instance = new Razorpay({
     key_id: process.env.RAZORPAY_ID,

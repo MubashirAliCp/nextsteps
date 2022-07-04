@@ -362,9 +362,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			success:(response)=>{
 				if (response.removeProduct){
 					alert("cart item removed")
-					{{!-- location.reload() --}}
+					location.reload()
 				}else{
-					
+					{{!-- alert("hiii") --}}
 					location.reload()
 					document.getElementById(proId).innerHTML=quantity+count
 				}

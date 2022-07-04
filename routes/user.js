@@ -1,7 +1,7 @@
 const express = require('express');
 const session = require('express-session');
-const { redirect } = require('express/lib/response');
-const { response } = require('../app');
+// const { redirect } = require('express/lib/response');
+
 const adminHelpers = require('../helpers/admin-helpers');
 const router = express.Router();
 const userHelpers = require('../helpers/user-helpers')
@@ -32,7 +32,7 @@ router.get('/',  function (req, res, next) {
 
 router.get('/login', (req, res) => {
   if (
-    req.session.loggedIn
+    req.session.logedIn
   ) {
     res.redirect('/')
   
@@ -130,7 +130,7 @@ router.get('/addto-cart/:id',(req,res)=>{
 router.post('/change-quantity',(req,res,next)=>{
 // console.log(req.body);
   userHelpers.changeProductQuantity(req.body).then((response)=>{
-  res.json({response:true})  
+  res.json(response)  
 
   })
 })

@@ -1,11 +1,10 @@
 var db = require('../config/connection')
 var collection = require('../config/collections');
 const bcrypt = require('bcrypt');
-const { response } = require('../app');
 const objectId = require('mongodb').ObjectId
 const multer = require('multer');
 const { ObjectId } = require('mongodb');
-const { status } = require('express/lib/response');
+// const { status } = require('express/lib/response');
 
 
 
@@ -19,6 +18,7 @@ module.exports = {
             let user = await db.get().collection(collection.ADMIN_COLLECTION).findOne({ email: userData.email })
             if (user) {
                 bcrypt.compare(userData.Password, user.Password).then((status) => {
+                    console.log('status',status);
                     if (status) {
                         console.log('login success');
                         response.user = user
