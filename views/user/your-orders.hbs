@@ -92,27 +92,27 @@
                                         <tr>
                                             <td width="20%">
                                             
-                                            <img src="https://i.imgur.com/u11K1qd.jpg" width="90">
+                                            {{!-- <img src="{{products.0.products.image.0}}" width="90"> --}}
 
                                         </td>
                                     
                                         <td width="60%">
-                                            <span class="font-weight-bold">Men's Sports cap</span>
+                                            <span class="font-weight-bold">{{products.0.products.title}}</span>
                                             <div class="product-qty">
-                                                <span class="d-block">{{this.quantity}}</span>
-                                                <span>Color:Dark</span>
+                                                <span class="d-block">{{quantity}}</span>
+                                                {{!-- <span>Color:Dark</span> --}}
                                                 
                                             </div>
                                         </td>
                                         <td width="20%">
                                             <div class="text-right">
-                                                <span class="font-weight-bold">${{this.totalAmount}}</span>
+                                                <span class="font-weight-bold">{{totalAmount}}</span>
                                             </div>
                                         </td>
                                         </tr>
 
 
-                                        <tr>
+                                        {{!-- <tr>
                                             <td width="20%">
                                             
                                             <img src="https://i.imgur.com/SmBOua9.jpg" width="70">
@@ -131,7 +131,7 @@
                                             <div class="text-right">
                                                 <span class="font-weight-bold">{{this.status}}</span>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                         </tr>
                                         
                                     </tbody> 
@@ -151,7 +151,7 @@
                                         <table class="table table-borderless">
 
                                             <tbody class="totals">
-
+{{!-- 
                                                 <tr>
                                                     <td>
                                                         <div class="text-left">
@@ -165,10 +165,10 @@
                                                             <span>$168.50</span>
                                                         </div>
                                                     </td>
-                                                </tr>
+                                                </tr> --}}
 
 
-                                                 <tr>
+                                                 {{!-- <tr>
                                                     <td>
                                                         <div class="text-left">
 
@@ -181,10 +181,10 @@
                                                             <span>$22</span>
                                                         </div>
                                                     </td>
-                                                </tr>
+                                                </tr> --}}
 
 
-                                                 <tr>
+                                                 {{!-- <tr>
                                                     <td>
                                                         <div class="text-left">
 
@@ -213,7 +213,7 @@
                                                             <span class="text-success">$168.50</span>
                                                         </div>
                                                     </td>
-                                                </tr>
+                                                </tr> --}}
 
 
                                                  <tr class="border-top border-bottom">

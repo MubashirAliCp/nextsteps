@@ -210,12 +210,12 @@
 
 
      <div class="text-center text-dark m-5 ">
-    <h2>PRODUCT MANAGEMENT </h2>
+    <h2>YOUR ORDERS </h2>
     <table id="userTable" class="display  table-dark table-hover ">
-        <thead>
+        {{!-- <thead>
          
             <a href="/admin/add-product"><button class="">Add Product</button></a>
-        </thead>
+        </thead> --}}
 
 <div class="container">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -228,12 +228,12 @@
     <thead>
         <tr>
             <th>Title</th>
-            <th>Price</th>
-            <th>Brand</th>
-            <th>Gender</th>
-            <th>Image</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Status</th>
+            <th>villaname</th>
+            <th>date</th>
+            <th>delete</th>
+            {{!-- <th>Edit</th>
+            <th>Delete</th> --}}
         </tr>
     </thead>
     <tbody>
@@ -245,7 +245,7 @@
             <td>{{this.date}}</td>
             
              {{!-- <td><img style="height: 40px;width: 40px;" src="data:{{this.image.0.contentType}};base64,{{this.image.0.imageBase64}}"></td> --}}
-              <td><a href="/admin/edit-product/{{this.date}}" class="btn btn-primary">Edit</a></td>
+              {{!-- <td><a href="/admin/edit-product/{{this.date}}" class="btn btn-primary">Edit</a></td> --}}
             <td><a href="/admin/delete-product/{{this.status}}" class="btn btn-danger" onclick="return confirm('Are You Want to Delete {{this.status}}?')">Delete</a></td>         
         </tr>
        {{/each}} 

@@ -146,7 +146,7 @@
 				</div>
 				<div class="col-12 px-md-5 px-4 mt-3">
 					{{!-- <div class="btn btn-primary w-100">${{total}}</div> --}}
-					<input class="btn btn-primary w-100 " type="submit" value="${{total}}">
+					<input class="btn btn-primary bg-success w-100 " type="submit" value="Pay ₹{{total}}">
 					
 				</div>
 			</div>
@@ -203,7 +203,7 @@ var options = {
  
 	
 	function verifyPayment(payment,order){
-				alert(']]]]?')
+		
 	$.ajax({
 		url:'/verify-payment',
 		data:{

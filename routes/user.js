@@ -174,6 +174,9 @@ router.get('/order-success',async(req,res)=>{
   // console.log(req.session.orderId);
   let orders=await userHelpers.getUserOrders(req.session.orderId)
   // console.log(orders+"");
+  orders.forEach(element =>{
+    element.date = moment(element.date).format("MM Do YY");
+  })
   res.render('user/order-success',{user:req.session.user,orders})
 })
  
@@ -187,7 +190,7 @@ router.get('/your-orders/:id',async(req,res)=>{
 router.post('/verify-payment',(req,res)=>{
   // console.log("req.bodyyyyyyy",req.body);
 
-  console.log("jdshjhjk");
+  
   userHelpers.verifyPayment(req.body).then(()=>{
   //  console.log("req.......",req.body);
 userHelpers.changePaymentStatus(req.body['order[receipt]']).then(()=>{
@@ -202,7 +205,11 @@ userHelpers.changePaymentStatus(req.body['order[receipt]']).then(()=>{
  
 
 router.get('/my-orders',async(req,res)=>{
+ 
   let orders=await userHelpers.getUserallOrders(req.session.user._id)
+  orders.forEach(element =>{
+    element.date = moment(element.date).format("MM Do YY");
+  })
   res.render('user/my-orders',{user:req.session.user,orders})
 })
 
@@ -237,12 +244,12 @@ router.post('/remove-Product-forwishlist',(req,res,next)=>{
   })
 })  
 
-
+ 
 
 router.get('/add-address',(req,res)=>{
   res.render("user/address-book",{user:req.session.user})
 })
-
+ 
 
 router.get('/address',(req,res)=>{
   if(req.session.user){

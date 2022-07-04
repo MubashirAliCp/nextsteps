@@ -75,7 +75,7 @@
 										</div>
 									</td>
 									<td class="column-2">{{this.products.title}}</td>
-									<td class="column-3">${{this.products.price}}</td>
+									<td class="column-3">₹{{this.products.price}}</td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" onclick="changeQuantity('{{this._id}}','{{this.products._id}}',-1)">
@@ -91,7 +91,7 @@
 											</div>
 											
 										</div>
-										<td class="column-3">${{this.products.total}}</td>
+										<td class=" column-3 ">₹{{this.products.total}}</td>
 										
 									</td>
 									{{!-- <td> <button class="btn btn-danger m-2">Remove</button> </td> --}}
@@ -137,12 +137,12 @@
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									${{total}}
+									₹{{total}}
 								</span>
 							</div>
 							
 						</div>
-						<div class="flex-w flex-t bor12 p-b-13">
+						{{!-- <div class="flex-w flex-t bor12 p-b-13">
 							<div class="size-208">
 								<span class="stext-110 cl2">
 									DC:
@@ -155,7 +155,7 @@
 								</span>
 							</div>
 							
-						</div>
+						</div> --}}
 
 
 						<div class="flex-w flex-t p-t-27 p-b-33">
@@ -167,7 +167,7 @@
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									${{total}}
+									₹{{total}}
 								</span>
 							</div>
 						</div>
