@@ -53,6 +53,25 @@ module.exports = {
             resolve(products)
         })
     },
+    find: (data) => {
+        return new Promise(async (resolve, reject) => {
+            let products = await db.get().collection(collection.PRODUCT_COLLECTION).find({gender:data}).toArray()
+            console.log(products);
+            resolve(products)
+        })
+    },
+
+
+    findcategory: (data) => {
+        return new Promise(async (resolve, reject) => {
+            let products = await db.get().collection(collection.PRODUCT_COLLECTION).find({category:data}).toArray()
+            console.log(products);
+            resolve(products)
+        })
+    },
+
+
+
 
 
     getProducts: (proId) => {
@@ -264,6 +283,9 @@ module.exports = {
         })
     },
     placeOrder: (order, products, total) => {
+        console.log("dskol");
+        const maintotal=parseInt(order.mainTotal)
+        console.log(maintotal);
         return new Promise((resolve, reject) => {
             console.log(order, products, total);
             let status = order['payment-method'] === 'COD' ? 'placed' : 'pending'
@@ -274,21 +296,25 @@ module.exports = {
                     mobile: order.mobile,
                     state: order.state,
                     postcode: order.postcode
-                },
+                }, 
                 userId: ObjectId(order.userId),
                 paymentMethode: order['payment-method'],
                 products: products,
-                totalAmount: total,
+                total:maintotal,
+                totalAmount:total,
+                
                 status: status,
                 date: new Date()
             }
             db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
+                console.log("jfskl");
                 db.get().collection(collection.CART_COLLECTION).deleteOne({ user: ObjectId(order.userId) })
                 resolve(response.insertedId)
             })
         })
     },
     getCartProductList: (userId) => {
+        console.log(userId);
         return new Promise(async (resolve, reject) => {
             let cart = await db.get().collection(collection.CART_COLLECTION).findOne({ user: ObjectId(userId) })
             resolve(cart.products)
@@ -535,6 +561,143 @@ module.exports = {
             console.log("............", address);
             resolve(address)
         })
-    }
+    },
+
+
+
+
+
+    searchFilter :(brandFilter,categoryFilter,price) => {
+      
+
+        return new Promise(async (resolve, reject) => {
+            let result
+    
+            if(brandFilter && categoryFilter  ){
+              let brandid=mongoose.Types.ObjectId(brandFilter);
+              let categoryid=mongoose.Types.ObjectId(categoryFilter)
+              console.log(brandid);
+              console.log(categoryid);
+                 result = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+                    {
+                        $match:{Brand:brandid}
+                        
+                    },
+    
+                    {
+                        $match:{Category:categoryid}
+                        
+                    },
+                    {
+                        $match:{Price:{$lt:price}}
+                    }
+                ])
+                console.log("1");
+            } 
+    
+            else if(brandFilter  ){
+              let brandid=Types.ObjectId(brandFilter);
+                result = await productData.aggregate([
+                  {
+                    $match:{Brand:brandid}
+                    
+                  },
+                  {
+                    $match:{Price:{$lt:price}}
+                  }
+                ])
+                console.log("2");
+                console.log(result);
+                
+              }
+              else if(categoryFilter){
+                let categoryid=Types.ObjectId(categoryFilter)
+            result = await productData.aggregate([
+              
+               
+                {  
+                    $match:{Category:categoryid}
+                    
+                },
+                {
+                    $match:{Price:{$lt:price}}
+                }
+            ])
+            console.log("3");
+          }
+        
+            else{
+                 result = await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+                    
+                    {
+                        $match:{Price:{$lt:price}}
+                    }
+                ])
+                console.log("4");
+            }
+            resolve(result)
+        })
+      },
+
+
+      validateCoupon: (data, userId) => {
+        console.log(userId);
+        return new Promise(async (resolve, reject) => {
+          console.log(data.coupon);
+          obj = {};
+          const coupon = await db.get().collection(collection.COUPON_COLLECTION).findOne({ couponCode: data.coupon });
+          console.log(coupon);
+          if (coupon) {
+            if (coupon.limit > 0) {
+              checkUserUsed = await db.get().collection(collection.COUPON_COLLECTION).findOne({
+                couponCode: data.coupon,
+                usedUsers: { $in: [ObjectId(userId)] },
+              });  
+              if (checkUserUsed) {
+                obj.couponUsed = true;
+                obj.msg = " You Already Used A Coupon";
+                console.log(" You Already Used A Coupon");
+                resolve(obj);
+              } else { 
+                let nowDate = new Date();
+                date = new Date(nowDate);
+                console.log(nowDate);
+                console.log(date); 
+                console.log(coupon.expirationTime);
+                let todayDate = new Date().toISOString().slice(0, 10);
+                console.log(todayDate);
+                if (todayDate <= coupon.expirationTime) {
+                    console.log("EFK");
+                  await db.get().collection(collection.COUPON_COLLECTION).updateOne(
+                    { couponCode: data.couponCode },
+                    { $push: { usedUsers: ObjectId(userId) } }
+                  );
+                  await db.get().collection(collection.COUPON_COLLECTION).findOneAndUpdate(
+                    { couponCode: data.couponCode },
+                    { $inc: { limit: -1 } }
+                  );
+                  let total = parseInt(data.total);
+                  let percentage = parseInt(coupon.discount);
+                  let discoAmount = ((total * percentage) / 100).toFixed();
+                  obj.discoAmountpercentage = percentage;
+                  obj.total = total - discoAmount;
+                  obj.success = true;
+                  resolve(obj);
+                } else {
+                  obj.couponExpired = true;
+                  resolve(obj);
+                }
+              }
+            } else {
+              obj.couponMaxLimit = true;
+              resolve(obj);
+            }
+          } else {
+            obj.invalidCoupon = true;
+            resolve(obj);
+          }   
+        });
+      },
+    
 
 }

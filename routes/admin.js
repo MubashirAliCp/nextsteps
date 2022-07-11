@@ -11,7 +11,7 @@ const moment = require('moment')
 
 
 router.get('/', (req, res) => {
-  
+   
   if ( 
     req.session.adminloggedIn
   ) {
@@ -37,6 +37,15 @@ router.post('/login', (req, res) => {
     }
   })
 })
+
+router.get('/admin-logout', (req, res) => {
+  console.log("hiiiiiiiii");
+  req.session.destroy()
+  res.redirect('/admin/')
+})
+
+
+
 router.get('/product', (req, res) => {
   adminHelpers.getAllProducts().then((products)=>{
   res.render('admin/products',{products, admin:true})
@@ -47,8 +56,7 @@ router.get('/add-product', (req, res) => {
 })
 router.post('/add-products', store.array('file'), (req, res) => {
   console.log(req.body);
-
-
+   
  
     // let image = req.files.image1
     // image.mv('./public/product-images/' + id + '.jpg', (err, done) => {
@@ -97,7 +105,7 @@ router.get('/users', (req, res) => {
   })
   
 })
-
+ 
 router.get('/orders', (req, res) => {
   adminHelpers.getAllorders().then((products)=>{
    
@@ -133,6 +141,77 @@ router.post('/edit-product/:id',(req,res)=>{
     res.redirect('/admin/product')
   })
 })
+
+
+
+// Coupenn...................
+
+
+router.get('/coupon-management', (req, res) => {
+  adminHelpers.getAllCoupons(req.body).then((response) => {
+    const AllCoupons = response;
+    console.log("all coupons",AllCoupons);
+    res.render('admin/coupon-management', { AllCoupons,admin: true });
+  }); 
+})
+
+router.get("/deletecoupon/:id", (req, res) => {
+  adminHelpers.deletecoupon(req.params.id).then((response) => {
+    res.json({ coupondeleted: true });
+  });
+});
+
+router.get("/addcoupon", (req, res) => {
+  res.render("admin/addcoupon", { layout: false });
+});
+
+router.post("/AddCoupon", (req, res) => {
+  adminHelpers.AddCoupon(req.body).then(() => {
+    res.redirect("/admin/addcoupon");
+  });
+});
+
+
+
+
+
+
+// dasbord........................
+
+router.post('/getData', async (req, res) => {
+  console.log(req.body, 'req.body');
+  const date = new Date(Date.now());
+  const month = date.toLocaleString("default", { month: "long" });
+  adminHelpers.salesReport(req.body).then((data) => {
+
+    let pendingAmount = data.pendingAmount
+    let salesReport = data.salesReport
+    let brandReport = data.brandReport
+    let orderCount = data.orderCount
+    let totalAmountPaid = data.totalAmountPaid
+    // let totalAmountRefund = data.totalAmountRefund
+
+    let dateArray = [];
+    let totalArray = [];
+    salesReport.forEach((s) => {
+      dateArray.push(`${month}-${s._id} `);
+      totalArray.push(s.total);
+    })
+    // let brandArray = [];
+    // let sumArray = [];
+    // brandReport.forEach((s) => {
+    //   brandArray.push(s._id);
+    //   sumArray.push(s.totalAmount);
+    // });
+    // console.log("", brandArray);
+    // console.log("", sumArray);
+    // console.log("", dateArray);
+    // console.log("", totalArray);
+    // console.log(totalArray);
+    res.json({ dateArray, totalArray, orderCount, totalAmountPaid })
+  })
+})
+
  
 
 module.exports = router;

@@ -1,3 +1,6 @@
+ 
+ {{!-- navbar................................ --}}
+ 
  <nav class="navbar  navbar-expand-lg navbar-light  sticky-top p-0  " style="color:black;">
   <div class="container-fluid bg-dark " style=" height: 5rem;">
    <a class="navbar-brand text-white" href="/admin"><strong>FOOTWEAR</strong></a>
@@ -17,24 +20,13 @@
         </li>
 
 
-
-
-
-
-
-
-        
-
         <li class="nav-item">
-          <a class="nav-link active  text-white" href="/admin/trans">Transactions</a>
+          <a class="nav-link active  text-white" href="/admin/coupon-management">coupons</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active  text-white" href="/admin/stati">Statics</a>
         </li>
-       
-        {{!-- <li class="nav-item">
-          <a class="nav-link active text-white" href="#" tabindex="-1" aria-disabled="false">CART</a>
-        </li> --}}
+  
      
       </ul>
       <form class="d-flex">
@@ -48,60 +40,11 @@
       {{/if}}
             <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  text-white pt-2 " data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
-						</a>
-
-
-
-{{!-- ----------------sample code of showing cart/wishlist count----------
-<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti text-white pt-2" data-notify="0">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a> --}}
-
-
-
-
-        {{!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> --}}
-        {{!-- <div class="pb-3">
-        <button class="btn btn-outline-info  " type="submit">Search</button>
-        </div> --}}
-
-
-           {{!-- <div class="dropdown pb-3 pl-2">
-          <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-          {{#if user}}
-         {{user.name}}
-         {{else}}
-         Account
-         {{/if}}
-          </button>
-        
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          {{#if user}}
-          <li><a class="dropdown-item text-dark" href="/logout">Logout </a></li>
-         {{else}}
-         <li><a class="dropdown-item text-dark" href="/login">Login </a></li>
-         {{/if}}
-           
-           
-          </ul>
-        </div> --}}
-         
+						</a>  
       </form>
     </div>
   </div>
 </nav>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -175,10 +118,10 @@
               <select id="g" onchange="show()" class="form-select opacity-75 " aria-label="Default select example"
                 name="gender">
                 <option value="selected">Select </option>
-                <option value="men" name="men">Men</option>
-                <option value="women">Women</option>
-                <option value="kids">Kids</option>
-                <option value="unisex">Unisex</option>
+                <option value="men" name="Men">Men</option>
+                <option value="women" name="Women">Women</option>
+                <option value="kids" name="Kids">Kids</option>
+                {{!-- <option value="unisex">Unisex</option> --}}
 
               </select>
 
@@ -205,11 +148,11 @@
               <p class="opacity-75">Category</p>
             </td>
             <td>
-              <select class="form-select opacity-75 " name="occassion" aria-label="Default select example">
+              <select class="form-select opacity-75 " name="category" aria-label="Default select example">
                 <option selected>Select </option>
-                <option value="casual">Casual</option>
-                <option value="formal">Formal</option>
-                <option value="sports">Chappal</option>
+                <option value="casual" name="casual">Casuals</option>
+                <option value="formal" name="formal">Formals</option>
+                <option value="chappal" name="chappal">Chappals</option>
               </select>
             </td>
           </tr>

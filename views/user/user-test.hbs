@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Shoping Cart</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="stylesheets/util.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/css.css">
+
+<div class="col md-4 d-flex  ">
+	<div class="col-md-4 bg-light">
+		<h4>{{address1.name}}</h4>
+		<p>{{address1.state}}</p>
+		<p>{{address1.city}}</p>
+		<p>{{address1.phone}}</p>
+	</div>
+	
+	
+	<div class="col-md-4 ">
+		<h4>{{address2.name}}</h4>
+		<p>{{address2.state}}</p>
+		<p>{{address2.city}}</p>
+		<p>{{address2.phone}}</p>
+	</div>
+</div>
+	
+
+<form action="" id="chekout-form">
+	<div class="flex-w flex-t bor12 p-t-15 p-b-30">
+
+		<div class="size-209 p-r-18 p-r-0-sm w-full-ssm m-5 " style="width:40rem;">
+			shipping adress
+			{{!-- <p class="stext-111 cl6 p-t-2">
+				<a href="">edit address</a>
+			</p> --}}
+
+			<div class="p-t-15">
+				
+
+
+					{{!-- <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9 ">
+						<select class="js-select2" name="time">
+							<option>Select a country...</option>
+							<option>USA</option>
+							<option>UK</option>
+						</select>
+						<div class="dropDownSelect2"></div>
+					</div> --}}
+
+					<div class="bor8 bg0 m-b-12">
+						<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="name" placeholder="Name ">
+					</div>
+
+					<div class="bor8 bg0 m-b-12">
+						<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="villaname"
+							placeholder="Villa Name / Adress">
+					</div>
+					<div class="bor8 bg0 m-b-12">
+						<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="mobile"
+							placeholder="mobile">
+					</div>
+
+					<div class="bor8 bg0 m-b-12">
+						<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state"
+							placeholder="State ">
+					</div>
+
+					<div class="bor8 bg0 m-b-22">
+						<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode"
+							placeholder="Postcode / Zip">
+					</div>
+
+					{{!-- <div class="flex-w">
+						<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer"><a
+								href="">Update Address </a>
+						</div>
+					</div> --}}
+
+			</div>
+		</div>
+
+
+		<div class="card box2 shadow-sm">
+			<div class="d-flex align-items-center justify-content-between p-md-5 p-4"> <span
+					class="h5 fw-bold m-0">Payment methods</span>
+				<div class="btn btn-primary bar"><span class="fas fa-bars"></span></div>
+			</div>
+			<ul class="nav nav-tabs mb-3 px-md-4 px-2">
+				<li ><label class="radio-inline">
+				<input type="radio" name="payment-methode" value="ONLINE" cheked>RAZOPAY    
+				</label></li>
+
+				{{!-- <li class="nav-item"> <a class="nav-link px-2" href="#">Mobile Payment</a> </li> --}}
+				<li><label class="radio-inline">
+				<input type="radio" name="payment-methode" value="COD" cheked> CASH ON DELIVERY
+				</label></li>
+				<li class="nav-item ms-auto"> <a class="nav-link px-2" href="#">+ More</a> </li>
+			</ul>
+			<div class="px-md-5 px-4 mb-4 d-flex align-items-center">
+				<div class="btn btn-success me-4"><span class="fas fa-plus"></span></div>
+				<div class="btn-group" role="group" aria-label="Basic radio toggle button group"> <input type="radio"
+						class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked> <label
+						class="btn btn-outline-primary" for="btnradio1"><span class="pe-1">+</span>5949</label>
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"> <label
+						class="btn btn-outline-primary" for="btnradio2"><span class="lpe-1">+</span>3894</label>
+				</div>
+			</div> 
+			<div class="row">
+				<div class="col-12">
+					{{!-- <div class="d-flex flex-column px-md-5 px-4 mb-4"> <span>Credit Card</span>
+					
+						<div class="inputWithIcon"> <input class="form-control" name="creditcard" type="text" value="5136 1845 5468 3894">
+							<span class=""> <img
+									src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png"
+									alt=""></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="d-flex flex-column ps-md-5 px-md-0 px-4 pt-1 m-5"> <span>Expiration<span
+								class="ps-1">Date</span></span>
+						<div class="inputWithIcon"> <input type="text" name="expiry" class="form-control" value="05/20"> <span
+								class="fas fa-calendar-alt"></span> </div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="d-flex flex-column pe-md-5 px-md-0 px-4  m-5"> <span>Code CVV</span>
+						<div class="inputWithIcon"> <input type="password" name="cvv" class="form-control" value="123"> <span
+								class="fas fa-lock"></span> </div>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="d-flex flex-column px-md-5 px-4 mb-4"> <span>Name</span>
+						<div class="inputWithIcon"> <input class="form-control text-uppercase" type="text" name="name"
+								value="valdimir berezovkiy"> <span class="far fa-user"></span> </div>
+					</div> --}}
+					<input type="text" name="userId" value="{{user._id}}" hidden>
+				</div>
+				<div class="col-12 px-md-5 px-4 mt-3">
+					{{!-- <div class="btn btn-primary w-100">${{total}}</div> --}}
+					<input class="btn btn-primary bg-success w-100 " type="submit" value="Pay ₹{{total}}">
+					
+				</div>
+			</div>
+		</div>
+		</form>
+
+		<script>
+			$("#chekout-form").submit((e)=>{
+				e.preventDefault() 
+				$.ajax({
+					url:'/place-order',
+					method:'post',
+					data:$('#chekout-form').serialize(),
+					success:(response)=>{
+						if(response.codSuccess){
+							location.href='/order-success'
+						}else{
+							
+							razorpayPayment(response)
+						}
+					}
+				})
+			});
+function razorpayPayment(order){
+var options = {
+	
+    "key": "rzp_test_M6m99fHKF8M3G1", // Enter the Key ID generated from the Dashboard
+    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "NEXT STEP",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+		verifyPayment(response,order)
+   
+		{{!-- alert(order) --}}
+    		},
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+  };
+  var rzp1 = new Razorpay(options);
+  rzp1.open();
+}
+ 
+	
+	function verifyPayment(payment,order){
+		
+	$.ajax({
+		url:'/verify-payment',
+		data:{
+			payment,
+			order
+		}, 
+		method:'post',
+		success:(response)=>{
+			if(response.status){
+				location.href='/order-success'
+			}else{
+				alert("payment failed")
+			}
+		}
+	})
+}
+</script>
+
+
+
+
+
+		<!-- Modal -->
+
+
+
+
+		<!--===============================================================================================-->
+		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/animsition/js/animsition.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/bootstrap/js/popper.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/select2/select2.min.js"></script>
+		<script>
+			$(".js-select2").each(function () {
+				$(this).select2({
+					minimumResultsForSearch: 20,
+					dropdownParent: $(this).next('.dropDownSelect2')
+				});
+			})
+		</script>
+		<!--===============================================================================================-->
+		<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+		<!--===============================================================================================-->
+		<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		<script>
+			$('.js-pscroll').each(function () {
+				$(this).css('position', 'relative');
+				$(this).css('overflow', 'hidden');
+				var ps = new PerfectScrollbar(this, {
+					wheelSpeed: 1,
+					scrollingThreshold: 1000,
+					wheelPropagation: false,
+				});
+
+				$(window).on('resize', function () {
+					ps.update();
+				})
+			});
+		</script>
+		<!--===============================================================================================-->
+		<script src="js/main.js"></script>

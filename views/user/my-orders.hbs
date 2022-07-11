@@ -231,7 +231,7 @@
             <th>Status</th>
             <th>villaname</th>
             <th>date</th>
-            <th>delete</th>
+            {{!-- <th>delete</th> --}}
             {{!-- <th>Edit</th>
             <th>Delete</th> --}}
         </tr>
@@ -246,7 +246,7 @@
             
              {{!-- <td><img style="height: 40px;width: 40px;" src="data:{{this.image.0.contentType}};base64,{{this.image.0.imageBase64}}"></td> --}}
               {{!-- <td><a href="/admin/edit-product/{{this.date}}" class="btn btn-primary">Edit</a></td> --}}
-            <td><a href="/admin/delete-product/{{this.status}}" class="btn btn-danger" onclick="return confirm('Are You Want to Delete {{this.status}}?')">Delete</a></td>         
+            {{!-- <td><a href="/admin/delete-product/{{this.status}}" class="btn btn-danger" onclick="return confirm('Are You Want to Delete {{this.status}}?')">Delete</a></td>          --}}
         </tr>
        {{/each}} 
        
