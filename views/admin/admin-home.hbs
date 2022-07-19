@@ -21,14 +21,15 @@
             <div class="profile-desc">
               <div class="profile-pic">
                 <div class="count-indicator">
-                  <img class="img-xs rounded-circle " src="/assets/images/faces/face15.jpg " alt="">
+                  {{!-- <img class="img-xs rounded-circle " src="/assets/images/faces/face15.jpg " alt=""> --}}
                   <span class="count bg-success"></span>
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
-                  <span>Gold Member</span>
+                  <h5 class="mb-0 font-weight-normal text-white">{{admin.name}}</h5>
+                  {{!-- <span>Gold Member</span> --}}
                 </div>
               </div>
+              
               <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
               <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
                 <a href="#" class="dropdown-item preview-item">
@@ -66,9 +67,9 @@
               </div>
             </div>
           </li>
-          <li class="nav-item nav-category">
+          {{!-- <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
-          </li>
+          </li> --}}
           <li class="nav-item menu-items">
             <a class="nav-link" href="admin">
               <span class="menu-icon">
@@ -78,17 +79,17 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
+            {{!-- <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic"> --}}
+              {{!-- <span class="menu-icon"> --}}
+                {{!-- <i class="mdi mdi-laptop"></i> --}}
               </span>
-              <span class="menu-title">Products</span>
-              <i class="menu-arrow"></i>
+              {{!-- <span class="menu-title">Products</span> --}}
+              {{!-- <i class="menu-arrow"></i> --}}
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="admin/add-product">Add Products</a></li>
-                <li class="nav-item"> <a class="nav-link" href="admin/product">View Products</a></li>
+                {{!-- <li class="nav-item"> <a class="nav-link" href="admin/add-product">Add Products</a></li>
+                <li class="nav-item"> <a class="nav-link" href="admin/product">View Products</a></li> --}}
                 {{!-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li> --}}
               </ul>
             </div>
@@ -118,11 +119,11 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="admin/addcoupon">
+            <a class="nav-link" href="admin/product">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>
-              <span class="menu-title">Statics</span>
+              <span class="menu-title">Products</span>
             </a>
           </li>
           {{!-- <li class="nav-item menu-items">
@@ -173,7 +174,7 @@
             </ul>
             <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown d-none d-lg-block">
-                <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="admin/add-product">Add products</a>
+                <a class="nav-link btn btn- create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="admin/add-product"></a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
                   <h6 class="p-3 mb-0">Projects</h6>
                   <div class="dropdown-divider"></div>
@@ -218,7 +219,7 @@
                   <i class="mdi mdi-view-grid"></i>
                 </a>
               </li>
-              <li class="nav-item dropdown border-left">
+              {{!-- <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                   <i class="mdi mdi-email"></i>
                   <span class="count bg-success"></span>
@@ -258,8 +259,8 @@
                   <div class="dropdown-divider"></div>
                   <p class="p-3 mb-0 text-center">4 new messages</p>
                 </div>
-              </li>
-              <li class="nav-item dropdown border-left">
+              </li> --}}
+              {{!-- <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                   <i class="mdi mdi-bell"></i>
                   <span class="count bg-danger"></span>
@@ -305,7 +306,7 @@
                   <div class="dropdown-divider"></div>
                   <p class="p-3 mb-0 text-center">See all notifications</p>
                 </div>
-              </li>
+              </li> --}}
               <li class="nav-item dropdown">
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                   <div class="navbar-profile">
@@ -361,8 +362,8 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">12.34</h3>
-                          <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                          <h3 class="mb-0">12</h3>
+                          <p class="text-success ml-2 mb-0 font-weight-medium"></p>
                         </div>
                       </div>
                       <div class="col-3">
@@ -371,7 +372,7 @@
                         </div>
                       </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Potential growth</h6>
+                    <h6 class="text-muted font-weight-normal">Total Orders</h6>
                   </div>
                 </div>
               </div>
@@ -381,8 +382,8 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">17.34</h3>
-                          <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p>
+                          <h3 class="mb-0">7</h3>
+                          <p class="text-success ml-2 mb-0 font-weight-medium"></p>
                         </div>
                       </div>
                       <div class="col-3">
@@ -391,7 +392,7 @@
                         </div>
                       </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Revenue current</h6>
+                    <h6 class="text-muted font-weight-normal">Total Products</h6>
                   </div>
                 </div>
               </div>
@@ -401,8 +402,8 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">12.34</h3>
-                          <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+                          <h3 class="mb-0">12545</h3>
+                          <p class="text-danger ml-2 mb-0 font-weight-medium"></p>
                         </div>
                       </div>
                       <div class="col-3">
@@ -411,7 +412,7 @@
                         </div>
                       </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Daily Income</h6>
+                    <h6 class="text-muted font-weight-normal">Last week Earnings</h6>
                   </div>
                 </div>
               </div>
@@ -421,8 +422,8 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">31.53</h3>
-                          <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                          <h3 class="mb-0">31345</h3>
+                          <p class="text-success ml-2 mb-0 font-weight-medium"></p>
                         </div>
                       </div>
                       <div class="col-3">
@@ -431,7 +432,7 @@
                         </div>
                       </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Expense current</h6>
+                    <h6 class="text-muted font-weight-normal">Total Earnings</h6>
                   </div>
                 </div>
               </div>
@@ -1013,8 +1014,11 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script async src="//jsfiddle.net/Renison/g0tpfL8j/embed/"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script>
         async function forHome(){ 
+     
     var totalAmount = []
     var totalDate = []
     console.log('success1');
@@ -1060,7 +1064,7 @@
                 }
             });
 
-            var ctxs = document.getElementById('brand').getContext('2d');
+            {{!-- var ctxs = document.getElementById('brand').getContext('2d');
             var chart = new Chart(ctxs, {
                 // The type of chart we want to create
                 type: 'doughnut',
@@ -1082,7 +1086,7 @@
                     mode:'index'
                   }
                 }
-            });
+            }); --}}
         }
         })
 

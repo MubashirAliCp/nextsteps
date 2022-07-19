@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const collections = require('../config/collections');
 const Razorpay = require('razorpay');
+const { resolve } = require('path');
 // const { resolve } = require('path');
 
 var instance = new Razorpay({
@@ -283,7 +284,7 @@ module.exports = {
         })
     },
     placeOrder: (order, products, total) => {
-        console.log("dskol");
+        console.log(order);
         const maintotal=parseInt(order.mainTotal)
         console.log(maintotal);
         return new Promise((resolve, reject) => {
@@ -301,8 +302,9 @@ module.exports = {
                 paymentMethode: order['payment-method'],
                 products: products,
                 total:maintotal,
+                paidAmount:maintotal,
                 totalAmount:total,
-                
+                CouponPercentage:order.discoAmountpercentage,
                 status: status,
                 date: new Date()
             }
@@ -349,7 +351,11 @@ module.exports = {
                 {
                     $project: {
                         item: '$products.item',
-                        quantity: '$products.quantity'
+                        quantity: '$products.quantity',
+                        status:"$products.status",
+                        orderCancelled:"$products.orderCancelled"
+
+
                     }
                 },
                 {
@@ -362,7 +368,7 @@ module.exports = {
                 },
                 {
                     $project: {
-                        item: 1, quantity: 1, products: { $arrayElemAt: ['$products', 0] }
+                        item: 1, quantity: 1,status:1,orderCancelled:1, products: { $arrayElemAt: ['$products', 0] }
                     }
                 }
 
@@ -397,6 +403,16 @@ module.exports = {
 
         })
     },
+    getorderdetailss:(data)=>{
+        return new Promise (async(resolve,reject)=>{
+        order=await  db.get().collection(collection.ORDER_COLLECTION).findOne({_id:ObjectId(data)});
+
+        resolve(order)
+
+        })
+    },
+
+
 
     verifyPayment: (details) => new Promise((resolve, reject) => {
         const crypto = require('crypto');
@@ -698,6 +714,90 @@ module.exports = {
           }   
         });
       },
+
+
+      getwishlistCount: (userId) => {
+        return new Promise(async (resolve, reject) => {
+            let count = 0
+            let cart = await db.get().collection(collection.WISHLIST_COLLECTION).findOne({ user: ObjectId(userId) })
+            if (cart) {
+                count = cart.products.length
+            }
+            resolve(count)
+        })
+    },
+
+
+    getorderProducts: (orderid) => {
+        return new Promise(async (resolve, reject) => {
+          const orderdetails = await db.get().collection(collection.ORDER_COLLECTION)
+            .findOne({ _id: orderid })
+            // .populate("product.pro_id")
+            // .toArray();
+            console.log("orderdet",orderdetails);
+          resolve(orderdetails);
+        });  
+      },
     
+
+
+      
+  cancelorder: (data) => {
+    console.log(data);
+    console.log("==========================================");
+    // console.log(data.ShippingCharge);
+    // order = mongoose.Types.ObjectId(data.orderId);
+    let quantity = parseInt(data.quantity);
+    discountPrice =
+      (parseInt(data.subtotal)*quantity) -
+      ((parseInt(data.couponPercent) * (parseInt(data.subtotal)*quantity)) / 100).toFixed(
+        0
+      ); 
+      console.log(discountPrice);
+    const status = "Cancelled";
+    return new Promise(async (resolve, reject) => {
+      const cancelorder = await db.get().collection(collection.ORDER_COLLECTION).updateMany(
+        { _id: ObjectId(data.orderId), "products.item": ObjectId(data.proId) },
+        {
+          $set: {
+            "products.$.status": status,
+            "products.$.orderCancelled": true,
+          },  
+
+          $inc: {
+            total: -discountPrice,
+            reFund: discountPrice,
+          },
+        }
+      );
+      await db.get().collection(collection.ORDER_COLLECTION).findOneAndUpdate(
+        { _id: ObjectId(data.proId) },
+        {
+          $inc: {
+            Stoke: quantity,
+          }, 
+        }
+      );
+    //   let products = await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+    //     {
+    //       $match: { _id:ObjectId(data.orderId) },
+    //     },
+    //     {
+    //       $project: {
+    //         _id: 0,
+    //         product: 1,
+    //       },
+    //     },
+    //     {
+    //       $unwind: "$product",
+    //     },
+    //     {
+    //       $match: { "product.orderCancelled": false },
+    //     },
+    //   ]);
+        resolve({ status: true });
+    });
+  },
+
 
 }

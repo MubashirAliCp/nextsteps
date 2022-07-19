@@ -5,8 +5,10 @@ const router = express.Router();
 const adminHelper = require('../helpers/admin-helpers')
 const store = require ('../middlewear/multer')
 const fs = require('fs');
+const userHelpers = require('../helpers/user-helpers')
 // const { status } = require('express/lib/response');
-const moment = require('moment')
+const moment = require('moment');
+const { getOrderCount } = require('../helpers/admin-helpers');
 /* GET users listing. */
 
 
@@ -15,8 +17,11 @@ router.get('/', (req, res) => {
   if ( 
     req.session.adminloggedIn
   ) {
+    let orderCount = adminHelpers.getOrderCount2(req.session.admin._id).then((count) => {
+      req.session.admin.cartCount = count
+    })
 
-    res.render('admin/admin-home', { admin:true })
+    res.render('admin/admin-home', { admin:true ,admin: req.session.admin,})
   } else {
     res.render('admin/admin-login', { "loginErr": req.session.loginErr })
     req.session.loginErr=false
@@ -96,12 +101,12 @@ router.post('/add-products', store.array('file'), (req, res) => {
       
     }))
     
-
+ 
   
 })
 router.get('/users', (req, res) => {
   adminHelpers.getAllUsers(req.body).then((user)=>{
-    res.render('admin/user',{user})
+    res.render('admin/user',{user,layout:false})
   })
   
 })
@@ -211,6 +216,43 @@ router.post('/getData', async (req, res) => {
     res.json({ dateArray, totalArray, orderCount, totalAmountPaid })
   })
 })
+
+
+
+// order-management.......................
+
+// router.get("/order-manegement", (req, res) => {
+//   adminHelpers.allorders().then((response) => {
+//     const allorders = response;
+//     allorders.forEach((element) => {
+//       element.ordered_on = moment(element.ordered_on).format("MMM Do YY");
+//     });
+//     // console.log("heyyehey",allorders );
+//     res.render("admin/order-manegement", { allorders });
+//   });
+// });
+
+router.get("/order-managee/:id", async(req, res) => {
+  // adminHelpers.orderdetails(req.params.id).then((response) => {
+    // const order = response;
+    let order= await userHelpers.getorderdetailss(req.params.id)
+    let products = await userHelpers.getOrderProducts(req.params.id)
+    const ordered_on = moment(order.ordered_on).format("MMM Do YY");
+    console.log("iiiiiiiiiii",order);
+    console.log("kkkkkkkkkkk",products);
+    res.render("admin/order-manage", { ordered_on, admin: true, order ,products});
+  });
+// });  
+
+router.post("/changeOrderStatus", (req, res) => {
+  console.log("admin.......")
+  adminHelpers.changeOrderStatus(req.body).then((response) => {
+    console.log(response);
+    res.json({ modified: true });
+  });
+});
+
+
 
  
 

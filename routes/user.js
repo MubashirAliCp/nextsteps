@@ -15,7 +15,7 @@ const verifyLogin = (req, res, next) => {
     res.redirect('/login')
   }
 }
- 
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   if (req.session.user) {
@@ -23,7 +23,7 @@ router.get('/', function (req, res, next) {
     let cartCount = userHelpers.getCartCount(req.session.user._id).then((count) => {
       req.session.user.cartCount = count
     })
-  } 
+  }
   adminHelpers.getAllProducts().then((products) => {
     let user = req.session.user
     res.render('user/home', { title: 'Express', user: req.session.user, products });
@@ -32,7 +32,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/all-products', (req, res) => {
   adminHelpers.getAllProducts().then((products) => {
-    console.log("heeeeeeeeeee");
+    // console.log("heeeeeeeeeee");
     let user = req.session.user
     res.render('user/all-products', { title: 'Express', user: req.session.user, products });
   })
@@ -154,7 +154,7 @@ router.post('/change-quantity', (req, res, next) => {
 
   })
 })
- 
+
 router.post('/remove-Product-forcart', (req, res, next) => {
   // console.log("shfshfjkdshfshfsh");
   userHelpers.removeFromcart(req.body, req.session.user._id).then(() => {
@@ -173,8 +173,8 @@ router.get('/place-order', async (req, res) => {
 
     res.render('user/payment', { total, user, address1: address[0], address2: address[1], AllCoupons })
   })
-}) 
-   
+})
+
 router.post("/couponApply", async (req, res) => {
 
   DeliveryCharges = parseInt(req.body.DeliveryCharges);
@@ -182,44 +182,44 @@ router.post("/couponApply", async (req, res) => {
   let userId = req.session.user._id;
   userHelpers.validateCoupon(req.body, userId).then((response) => {
     req.session.couponTotal = response.total;
-    if (response.success) { 
-      res.json({  
+    if (response.success) {
+      res.json({
         couponSuccess: true,
-        total: response.total ,
+        total: response.total,
         discountpers: response.discoAmountpercentage,
       });
     } else if (response.couponUsed) {
       res.json({ couponUsed: true });
     } else if (response.couponExpired) {
-      res.json({ couponExpired: true });  
+      res.json({ couponExpired: true });
     } else if (response.couponMaxLimit) {
-      res.json({ couponMaxLimit: true }); 
+      res.json({ couponMaxLimit: true });
     } else {
       res.json({ invalidCoupon: true });
-    } 
+    }
   });
 });
 
 router.post('/place-order', async (req, res) => {
   console.log(req.body);
-console.log(req.body['payment-methode']);
+  console.log(req.body['payment-methode']);
   let products = await userHelpers.getCartProductList(req.body.userId)
   // console.log();
   let totalPrice = await userHelpers.getTotalAmount(req.body.userId)
-  const total=parseInt(req.body.mainTotal)
-  
+  const total = parseInt(req.body.mainTotal)
+
   userHelpers.placeOrder(req.body, products, totalPrice).then((orderId) => {
     console.log("ighfkdl");
     req.session.orderId = orderId
     if (req.body['payment-methode'] === 'COD') {
       console.log(orderId);
       res.json({ codSuccess: true })
-    } else {  
-      console.log("cod..................."); 
+    } else {
+      console.log("cod...................");
       userHelpers.generateRazorpay(orderId, total).then((response) => {
         res.json(response)
       })
-    } 
+    }
 
   })
 
@@ -230,20 +230,21 @@ console.log(req.body['payment-methode']);
 router.get('/order-success', async (req, res) => {
   // console.log(req.session.orderId);
   let orders = await userHelpers.getUserOrders(req.session.orderId)
-  console.log(orders+"");
+  console.log(orders + "");
   orders.forEach(element => {
     element.date = moment(element.date).format("MM Do YY");
   })
+  console.log(orders);
   res.render('user/order-success', { user: req.session.user, orders })
 })
-   
+
 router.get('/your-orders/:id', async (req, res) => {
   let products = await userHelpers.getOrderProducts(req.params.id)
   // console.log("[[[[[[[",products);    
   res.render('user/your-orders', { user: req.session.user, products })
 })
 
-  
+
 router.post('/verify-payment', (req, res) => {
   // console.log("req.bodyyyyyyy",req.body);
 
@@ -264,10 +265,12 @@ router.post('/verify-payment', (req, res) => {
 router.get('/my-orders', async (req, res) => {
 
   let orders = await userHelpers.getUserallOrders(req.session.user._id)
+  let products = await userHelpers.getOrderProducts(req.params.id)
   orders.forEach(element => {
     element.date = moment(element.date).format("MM Do YY");
   })
-  res.render('user/my-orders', { user: req.session.user, orders })
+  console.log("orders...........", orders);
+  res.render('user/my-orders', { user: req.session.user, orders ,products})
 })
 
 
@@ -275,11 +278,15 @@ router.get('/profile', (req, res) => {
   let cartCount = userHelpers.getCartCount(req.session.user._id).then((count) => {
     req.session.user.cartCount = count
   })
+  let wishlistCount = userHelpers.getwishlistCount(req.session.user._id).then((countwish) => {
+    req.session.user.wishlistCount = countwish
+  })
+
   res.render('user/profile', { user: req.session.user })
 })
 
 
-// wishlist.....
+// wishlist.......................
 
 router.get('/whishlist/:id', (req, res) => {
   console.log("hi.........")
@@ -359,7 +366,7 @@ router.post('/search-filter', (req, res) => {
   // }
   userHelpers.searchFilter(brandFilter, categoryFilter, price).then((result) => {
     filterResult = result
-    console.log("==============================================");
+    // console.log("==============================================");
     // console.log(result);
     res.json({ status: true })
   })
@@ -369,7 +376,26 @@ router.post('/search-filter', (req, res) => {
 // router.get("/deleteAddress/:id", (req, res) => {
 //   userHelper.deleteAddress(req.params.id, req.session.user).then((response) => {
 //     res.redirect("/address");
-//   });
-// });
+//   });  
+// });  
+
+router.get("/myy-order/:id", async (req, res) => {
+  let products = await userHelpers.getOrderProducts(req.params.id)
+ let order= await userHelpers.getorderdetailss(req.params.id)
+
+  const user = req.session.user;
+  console.log("products....",order);
+ 
+  res.render('user/myy-order', { user, products,order })
+})
+// }) 
+
+
+router.post("/cancel-order", (req, res) => {
+ 
+  userHelpers.cancelorder(req.body).then((response) => {
+    res.json({ status: true ,user: req.session.user});
+  });
+});
 
 module.exports = router;

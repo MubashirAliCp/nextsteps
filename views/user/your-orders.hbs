@@ -22,6 +22,7 @@
                          
 
                         <div class="invoice p-5">
+                           
 
                             <h5>Your order Confirmed!</h5>
 
@@ -31,15 +32,31 @@
                             <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
 
                                 <table class="table table-borderless">
-                                    
+                                   
+                                    <thead>
+
+                        <tr>
+                            <th scope="col">title</th>
+                            <th scope="col">Brand</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Image</th>
+                            {{!-- <th scope="col"></th> --}}
+
+                            {{!-- <th scope="col"><i class="fas fa-edit "></i></th>
+                            <th scope="col"><i class="fas fa-trash-alt "></i></th> --}}
+                        </tr>
+
+                    </thead>
                                     <tbody>
+                                         {{#each products}}
                                        
                                         <tr>
                                             <td>
                                                 <div class="py-2">
 
-                                                    <span class="d-block text-muted">Order Date</span>
-                                                <span>{{this.date}}</span>
+                                                    {{!-- <span class="d-block text-muted">Item</span> --}}
+                                                <span>{{this.products.title}}</span>
                                                     
                                                 </div>
                                             </td>
@@ -47,8 +64,8 @@
                                             <td>
                                                 <div class="py-2">
 
-                                                    <span class="d-block text-muted">Mobile No</span>
-                                                <span>{{this.deliveryDetails.mobile}}</span>
+                                                    {{!-- <span class="d-block text-muted">Brand</span> --}}
+                                                <span>{{this.prodcuts.brand}}</span>
                                                     
                                                 </div>
                                             </td>
@@ -56,8 +73,17 @@
                                             <td>
                                                 <div class="py-2">
 
-                                                    <span class="d-block text-muted">Payment</span>
-                                                <span>{{this.paymentMethode}}</span>
+                                                    {{!-- <span class="d-block text-muted">Price</span> --}}
+                                                <span>{{this.products.price}}</span>
+                                                    
+                                                </div>
+                                            </td>
+
+                                              <td>
+                                                <div class="py-2">
+
+                                                    {{!-- <span class="d-block text-muted">Discount</span> --}}
+                                                <span>{{this.quantity}}</span>
                                                     
                                                 </div>
                                             </td>
@@ -65,13 +91,17 @@
                                             <td>
                                                 <div class="py-2">
 
-                                                    <span class="d-block text-muted">Shiping Address</span>
-                                                <span>{{this.deliveryDetails.villaname}}</span>
+                                                    {{!-- <span class="d-block text-muted">Discount</span> --}}
+                                                {{!-- <span>{{this.procuts.discount}}</span> --}}
+                                            <img style="height: 40px;width: 40px;" src="data:{{this.products.image.0.contentType}};base64,{{this.products.image.0.imageBase64}}"></td>
                                                     
                                                 </div>
+
                                             </td>
                                         </tr>
+                                        {{/each}}
                                     </tbody>
+                                    
 
                                 </table>
 
@@ -96,7 +126,7 @@
 
                                         </td>
                                     
-                                        <td width="60%">
+                                        {{!-- <td width="60%">
                                             <span class="font-weight-bold">{{products.0.products.title}}</span>
                                             <div class="product-qty">
                                                 <span class="d-block">{{quantity}}</span>
@@ -140,7 +170,7 @@
                                     
 
 
-                                </div>
+                                </div> 
 
 
 
@@ -214,9 +244,10 @@
                                                         </div>
                                                     </td>
                                                 </tr> --}}
+                                              
 
 
-                                                 <tr class="border-top border-bottom">
+                                                 {{!-- <tr class="border-top border-bottom">
                                                     <td>
                                                         <div class="text-left">
 
@@ -229,7 +260,8 @@
                                                             <span class="font-weight-bold">${{total}}</span>
                                                         </div>
                                                     </td>
-                                                </tr>
+                                                </tr> --}}
+                                            
                                                 
                                             </tbody>
                                             
@@ -244,14 +276,14 @@
 
                                 <p>We will be sending shipping confirmation email when the item shipped successfully!</p>
                                 <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
-                                <span>Nike Team</span>
+                                <span>TEAM NEXTSTEPS</span>
 
 
 
                             
 
                         </div>
-                        <a href='/your-orders/{{this._id}}'><button class="btn btn-dark ml-5 mb-5" style="">View Orders</button></a>
+                        <a href='/my-orders'><button class="btn btn-dark ml-5 mb-5" style="">View Orders</button></a>
                         
                         <div class="d-flex justify-content-between footer p-3">
                             

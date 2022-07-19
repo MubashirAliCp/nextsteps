@@ -26,6 +26,11 @@
          <li class="nav-item">
           <a class="nav-link active  text-white " href="/find/kids">KIDS</a>
         </li>
+
+{{!-- 
+          <li class="nav-item">
+          <a class="nav-link active  text-white " href="/admin/order-manegement">my orders</a>
+        </li> --}}
          {{!-- <li class="nav-item">
           <a class="nav-link active  text-white " href="/my-orders">your orders</a>
           
@@ -66,7 +71,7 @@
 
 
         {{#if user}}
-      <a href="cart"class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart text-white pt-2" id="cart-count" data-notify="{{user.cartCount}}">
+      <a href="/cart"class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart text-white pt-2" id="cart-count" data-notify="{{user.cartCount}}">
 							<i class="zmdi zmdi-shopping-cart"></i>
       </a>
      

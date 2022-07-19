@@ -190,7 +190,7 @@ body {
                       </li>
                     </ul>
                       <div class="flex-w flex-m w-full-sm mt-3 md-6   ">
-                        <button type="button" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4  " style="height:40px ;" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button type="button" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4  text-success" style="height:40px ;" data-toggle="modal" data-target="#exampleModalCenter">
 														Get New Coupon
 													  </button>
 													<h6 class="mt-3">Enter your coupon code if you have one.</h6>
@@ -418,7 +418,7 @@ var options = {
 					success: (response) => {
 						if (response.couponSuccess) {  
 							let oldTotal =parseInt(document.getElementById('couponTotal').value)
-              alert(response.total)
+             
 							let discount = oldTotal - parseInt(response.total)
              
               let discountpercentag=parseInt(response.discountpers)

@@ -47,7 +47,7 @@
 		</div>
 	</div>
 		
-
+<div id="products">
 	<!-- Shoping Cart -->
 	<form class="bg0 p-t-75 p-b-85">
 		<div class="container">
@@ -185,7 +185,7 @@
 			</div>
 		</div>
 	</form>
-		
+		</div>
 	
 		
 
@@ -362,11 +362,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			success:(response)=>{
 				if (response.removeProduct){
 					alert("cart item removed")
-					{{!-- location.reload() --}}
+					$("#products").load(location.href + " #products");
 				}else{
 					{{!-- alert("hiii") --}}
 					{{!-- location.reload() --}}
 					document.getElementById(proId).innerHTML=quantity+count
+					$("#products").load(location.href + " #products");
+				
 				}
 				
 			}

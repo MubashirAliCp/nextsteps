@@ -304,7 +304,7 @@ let totalAmounts=await db.get().collection(collection.ORDER_COLLECTION).aggregat
 //  }
 // ]).toArray()
 
-console.log('5555555555555555555555555555555555555555555555555555555555555555555555');
+console.log('55');
 // console.log(totalAmountRefund);
 
 
@@ -319,9 +319,66 @@ response.totalAmountPaid=totalAmounts[0].totalAmount
 resolve(response)      
        })
         
-     }
+     },
+
+
+     allorders: () => {
+        // console.log("hhhhhhhhhhhhhhh");
+        return new Promise(async (resolve, reject) => {
+          const allorders = await db.get().collection(collection.ORDER_COLLECTION)
+            .find({})
+            // .populate("product.pro_id")
+            .sort({ _id: 1 })
+            .toArray();
+          resolve(allorders);
+        });
+      },
+
+      orderdetails: (orderID) => {
+        return new Promise(async (resolve, reject) => {
+          const orderdetails = await db.get().collection(collection.ORDER_COLLECTION)
+            .findOne({ _id:objectId(orderID) })
+            // .populate("product.pro_id")
+            // .lean();
+            // toArray()
+          resolve(orderdetails);
+        });
+      },
+
+
+      changeOrderStatus: (data) => {
+        return new Promise(async (resolve, reject) => {
+         console.log(data);
+          const state = await db.get().collection(collection.ORDER_COLLECTION).updateOne(
+            { "products.item": objectId(data.proId) },
+           
+            {
+              $set: {
+                "products.$.status":data.orderStatus
+              },
+            }
+          );
+          console.log(state);
+          console.log("admin.......")
+          resolve();
+        });
+      },
 
 
 
+     
+     
+      getOrderCount2: () => {
+        console.log("ordercount");
+        return new Promise(async (resolve, reject) => {
+            let count = 0
+            let order = await db.get().collection(collection.ORDER_COLLECTION).find({})
+            // if (order) {
+                count = order.length
+                
+            // }
+            resolve(count)
+        })
+      },
 
 }

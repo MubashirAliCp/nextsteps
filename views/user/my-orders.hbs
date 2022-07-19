@@ -227,11 +227,13 @@
     
     <thead>
         <tr>
-            <th>Title</th>
+            <th>Name</th>
+            <th>Date</th>
+            {{!-- <th>villaname</th> --}}
             <th>Status</th>
-            <th>villaname</th>
-            <th>date</th>
-            {{!-- <th>delete</th> --}}
+            <th>Total</th>
+            <th>Total Paid</th>
+            <th>Details</th>
             {{!-- <th>Edit</th>
             <th>Delete</th> --}}
         </tr>
@@ -240,14 +242,17 @@
         {{#each orders}}
         <tr>
             <td style="width: 10rem;">{{this.deliveryDetails.name}}</td>
-            <td>{{this.status}}</td>
-             <td class="">{{this.deliveryDetails.villaname}}</td>
             <td>{{this.date}}</td>
+            <td class="text-success">{{this.status}}</td>
+             <td class="">{{this.totalAmount}}</td>
+            <td>{{this.total}}</td>
+            <td><a href="/myy-order/{{this._id}}" class="btn primary-btn text-success">Details</a></td>
             
              {{!-- <td><img style="height: 40px;width: 40px;" src="data:{{this.image.0.contentType}};base64,{{this.image.0.imageBase64}}"></td> --}}
               {{!-- <td><a href="/admin/edit-product/{{this.date}}" class="btn btn-primary">Edit</a></td> --}}
             {{!-- <td><a href="/admin/delete-product/{{this.status}}" class="btn btn-danger" onclick="return confirm('Are You Want to Delete {{this.status}}?')">Delete</a></td>          --}}
         </tr>
+         
        {{/each}} 
        
     </tbody>
